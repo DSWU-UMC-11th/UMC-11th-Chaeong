@@ -1,0 +1,26 @@
+:root {
+  --bg-main: #F6F7F9;
+  --bg-white: #FFFFFF;
+  --text-dark: #17191E;
+  --text-gray: #606774;
+  --text-lightgray: #969DA8;
+  --btn-blue: #2563EB;
+  --border-light: #E3E6EB;
+
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+  color: var(--text-dark);
+  background-color: var(--bg-main);
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  background: var(--bg-main);
+  color: var(--text-dark);
+}
