@@ -1,6 +1,6 @@
 import React from "react";
 import type { Movie } from "../types/movie";
-import { MovieCard } from "./movie-card";
+import { MovieCard } from "./movies/movie-card";
 
 interface ProfileSectionProps {
   bookmarkedMovies: Movie[];

@@ -1,19 +1,21 @@
-import React, { useState } from "react";
-import type { Movie } from "../types/movie";
+import { useNavigate, useParams } from "@tanstack/react-router";
+import { useState } from "react";
+import { movies } from "../data/movies";
 
-interface MovieDetailProps {
-  movie: Movie;
-  onBack: () => void;
-  onToggleBookmark: (id: number) => void;
-}
+export function MovieDetailPage() {
+  const { movieId } = useParams({ from: "/movies/$movieId" });
+  const navigate = useNavigate();
+  const foundMovie = movies.find((item) => item.id === Number(movieId));
 
-export const MovieDetail: React.FC<MovieDetailProps> = ({
-  movie,
-  onBack,
-  onToggleBookmark,
-}) => {
+  const [isBookmarked, setIsBookmarked] = useState(foundMovie?.isBookmarked ?? false);
   const [rating, setRating] = useState<number>(0);
   const [reviewText, setReviewText] = useState("");
+
+  if (!foundMovie) {
+    return <main>영화를 찾을 수 없어요.</main>;
+  }
+
+  const movie = { ...foundMovie, isBookmarked };
 
   return (
     <div className="detail-page-container">
@@ -22,7 +24,7 @@ export const MovieDetail: React.FC<MovieDetailProps> = ({
         style={{ backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url(${movie.backdropPath})` }}
       >
         <div className="stage-content">
-          <button className="back-link" onClick={onBack}>
+          <button className="back-link" onClick={() => navigate({ to: "/" })}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
               <path
                 d="M15 18L9 12L15 6"
@@ -61,7 +63,7 @@ export const MovieDetail: React.FC<MovieDetailProps> = ({
           <div className="detail-actions">
             <button
               className={`bookmark-action-btn ${movie.isBookmarked ? "bookmarked" : ""}`}
-              onClick={() => onToggleBookmark(movie.id)}
+              onClick={() => setIsBookmarked((prev) => !prev)}
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill={movie.isBookmarked ? "#FFFFFF" : "none"}>
                 <path
@@ -116,4 +118,4 @@ export const MovieDetail: React.FC<MovieDetailProps> = ({
       </main>
     </div>
   );
-};
+}
