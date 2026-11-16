@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>간이 프론트</title>
+</head>
+<body>
+  <h2>간이 프론트 : 닉네임 중복 체크</h2>
+  <button onclick="checkNickname()">'noco'으로 중복 체크</button>
+  <pre id="result"></pre>
+
+  <script>
+    async function checkNickname() {
+      const res = await fetch("http://localhost:8080/members/nickname/noco");
+      const data = await res.json();
+      document.getElementById("result").textContent = JSON.stringify(data);
+    }
+  </script>
+</body>
+</html>
